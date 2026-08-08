@@ -29,6 +29,12 @@ draft: false
 
 在第二个 `---` 后使用普通 Markdown 写正文即可。
 
+需要使用表情时，可以引用 `site/public/emoji/` 中的图片：
+
+```markdown
+![吃瓜](../../emoji/chigua.png)
+```
+
 ## 本地预览
 
 进入 `site` 目录后运行：
