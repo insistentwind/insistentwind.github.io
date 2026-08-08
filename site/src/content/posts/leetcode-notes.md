@@ -4,7 +4,7 @@ description: "按题型整理力扣练习、常用模板、错误原因和复习
 published: 2026-08-08
 category: "算法"
 tags: ["LeetCode", "数据结构", "算法"]
-image: "../../assets/images/DesktopWallpaper/d6.avif"
+image: "/assets/images/wallpaper/moonlit-ruins.webp"
 draft: false
 ---
 

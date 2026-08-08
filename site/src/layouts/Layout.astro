@@ -8,6 +8,8 @@ import FancyboxManager from "@components/features/FancyboxManager.astro";
 import FontSetup from "@components/features/FontSetup.astro";
 import MusicManager from "@components/features/MusicManager.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
+import PointerEffects from "@components/controls/PointerEffects.astro";
+import ReadingProgress from "@components/controls/ReadingProgress.astro";
 
 import {
 	analyticsConfig,
@@ -583,6 +585,8 @@ const siteLang = lang.replace("_", "-");
   >
 
     <div id="progress-bar"></div>
+    <ReadingProgress />
+    <PointerEffects />
 
     {/* 卡片样式：根据 localStorage 覆盖默认配置 */}
     <script is:inline define:vars={{

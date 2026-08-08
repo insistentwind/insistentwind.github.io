@@ -19,42 +19,36 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	 *
 	 * 如果只使用一张图片或者使用随机图API，推荐直接使用字符串格式：
 	 * desktop: "https://t.alcy.cc/pc",   // 随机图API
-	 * desktop: "assets/images/DesktopWallpaper/d1.avif", // 单张图片
+	 * desktop: "/assets/images/wallpaper/sakura-garden.webp", // 单张图片
 	 *
 	 * mobile: "https://t.alcy.cc/mp", // 随机图API
-	 * mobile: "assets/images/MobileWallpaper/m1.avif", // 单张图片
+	 * mobile: "/assets/images/wallpaper/sakura-garden.webp", // 单张图片
 	 *
 	 * 支持配置多张图片（数组），每次刷新页面随机显示一张：
 	 * desktop: [
-	 * "assets/images/DesktopWallpaper/d1.avif",
-	 * "assets/images/DesktopWallpaper/d2.avif",
+	 * "/assets/images/wallpaper/sakura-garden.webp",
+	 * "/assets/images/wallpaper/lantern-path.webp",
 	 * ],
 	 *
 	 * mobile:[
-	 *   "assets/images/MobileWallpaper/m1.avif",
-	 *   "assets/images/MobileWallpaper/m2.avif",
+	 *   "/assets/images/wallpaper/sakura-garden.webp",
+	 *   "/assets/images/wallpaper/lantern-path.webp",
 	 * ],
 	 */
 	src: {
 		// 桌面背景图片（支持单张或多张随机）
-		// desktop: "assets/images/DesktopWallpaper/d1.avif",
+		// desktop: "/assets/images/wallpaper/sakura-garden.webp",
 		desktop: [
-			"assets/images/DesktopWallpaper/d1.avif",
-			"assets/images/DesktopWallpaper/d2.avif",
-			"assets/images/DesktopWallpaper/d3.avif",
-			"assets/images/DesktopWallpaper/d4.avif",
-			"assets/images/DesktopWallpaper/d5.avif",
-			"assets/images/DesktopWallpaper/d6.avif",
+			"/assets/images/wallpaper/sakura-garden.webp",
+			"/assets/images/wallpaper/lantern-path.webp",
+			"/assets/images/wallpaper/moonlit-ruins.webp",
 		],
 		// 移动背景图片（支持单张或多张随机）
-		// mobile: "assets/images/MobileWallpaper/m1.avif",
+		// mobile: "/assets/images/wallpaper/sakura-garden.webp",
 		mobile: [
-			"assets/images/MobileWallpaper/m1.avif",
-			"assets/images/MobileWallpaper/m2.avif",
-			"assets/images/MobileWallpaper/m3.avif",
-			"assets/images/MobileWallpaper/m4.avif",
-			"assets/images/MobileWallpaper/m5.avif",
-			"assets/images/MobileWallpaper/m6.avif",
+			"/assets/images/wallpaper/sakura-garden.webp",
+			"/assets/images/wallpaper/lantern-path.webp",
+			"/assets/images/wallpaper/moonlit-ruins.webp",
 		],
 		// 背景视频播放地址
 		// 支持单个视频路径（字符串）或多个视频循环（数组，参考上面壁纸配置）
@@ -73,17 +67,17 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-				title: "InsistentWind",
+			title: "InsistentWind",
 			// 主页横幅主标题字体大小
-				titleSize: "4rem",
+			titleSize: "4rem",
 			// 主页横幅副标题
-				subtitle: [
-					"记录几何、优化、建模与算法",
-					"把复杂的问题想清楚",
-					"把值得记住的过程写下来",
-				],
+			subtitle: [
+				"记录几何、优化、建模与算法",
+				"把复杂的问题想清楚",
+				"把值得记住的过程写下来",
+			],
 			// 主页横幅副标题字体大小
-				subtitleSize: "1.25rem",
+			subtitleSize: "1.25rem",
 			typewriter: {
 				// 是否启用打字机效果
 				// 打字机开启 → 循环显示所有副标题
@@ -132,7 +126,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		// 壁纸轮播配置，横幅壁纸和全屏壁纸共享，仅在配置多张图片时生效
 		carousel: {
 			// 是否启用壁纸轮播；关闭时保持每次刷新随机显示一张
-				enable: true,
+			enable: true,
 			// 轮播切换间隔（毫秒）
 			interval: 5000,
 			// 过渡效果: 'fade' 渐变 | 'zoom' 缩放 | 'slide' 滑动 | 'kenburns' 旋转木马

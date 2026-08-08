@@ -4,7 +4,7 @@ description: "记录从拓扑优化结果到可编辑、可制造几何模型的
 published: 2026-08-08
 category: "结构优化"
 tags: ["拓扑优化", "几何重建", "有限元"]
-image: "../../assets/images/DesktopWallpaper/d4.avif"
+image: "/assets/images/wallpaper/moonlit-ruins.webp"
 draft: false
 ---
 

@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		return [];
 	}
 
-	const allPosts = await getCollection("posts");
+	const allPosts = (await getCollection("posts")) as CollectionEntry<"posts">[];
 	const publishedPosts = allPosts.filter((post) => !post.data.draft);
 
 	return publishedPosts.map((post) => {

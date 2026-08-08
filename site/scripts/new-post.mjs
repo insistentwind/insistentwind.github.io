@@ -31,7 +31,7 @@ const content = `---
 title: "${title.replaceAll('"', '\\"')}"
 published: ${today}
 description: "请填写文章摘要"
-image: "../../assets/images/DesktopWallpaper/d1.avif"
+image: "/assets/images/wallpaper/sakura-garden.webp"
 tags: []
 category: "随笔"
 draft: true

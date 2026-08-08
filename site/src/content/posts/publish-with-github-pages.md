@@ -4,7 +4,7 @@ description: "从本地写作到自动上线：这套博客最短的日常发布
 published: 2026-08-07
 category: "工具"
 tags: ["GitHub", "部署", "工作流"]
-image: "../../assets/images/DesktopWallpaper/d3.avif"
+image: "/assets/images/wallpaper/lantern-path.webp"
 ---
 
 这套站点使用 GitHub Pages 托管，发布过程由 GitHub Actions 自动完成。日常更新不需要手动上传构建产物。
@@ -26,7 +26,7 @@ description: "用于首页和搜索结果的简短摘要"
 published: 2026-08-08
 category: "分类"
 tags: ["标签一", "标签二"]
-image: "../../assets/images/DesktopWallpaper/d1.avif"
+image: "/assets/images/wallpaper/sakura-garden.webp"
 draft: false
 ---
 ```

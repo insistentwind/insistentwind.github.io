@@ -1,16 +1,4 @@
 {
-  "src:assets/images/DesktopWallpaper/d6.avif": "d9e5ec9ca7aebda9b0",
-  "src:assets/images/DesktopWallpaper/d5.avif": "e2dbe0e1dae1d9c9cd",
-  "src:assets/images/DesktopWallpaper/d4.avif": "727991b7a7bbe2b8c2",
-  "src:assets/images/DesktopWallpaper/d3.avif": "4268936f829e99adc7",
-  "src:assets/images/DesktopWallpaper/d2.avif": "b49db67a7e91d0aabc",
-  "src:assets/images/DesktopWallpaper/d1.avif": "8b9bb59ba6bae7d7dd",
-  "src:assets/images/MobileWallpaper/m6.avif": "a08eaac3abbfc7bdc8",
-  "src:assets/images/MobileWallpaper/m5.avif": "af99aecab1c1d2c2cb",
-  "src:assets/images/MobileWallpaper/m4.avif": "f0e1e2d4bfc7c2abc1",
-  "src:assets/images/MobileWallpaper/m3.avif": "c3a6b4dac2cad2c0c9",
-  "src:assets/images/MobileWallpaper/m2.avif": "f1e0ded8c2c6bbb0bc",
-  "src:assets/images/MobileWallpaper/m1.avif": "cccce0cbc0d59294c0",
   "src:assets/images/logo/firefly-light.png": "000000000000000000",
   "src:assets/images/logo/firefly-dark.png": "ffffffffffffffffff",
   "public:emoji/zhuakuang.png": "d89544d79442d8782b",
@@ -137,5 +125,8 @@
   "public:emoji/baoquan.png": "efb741f2bb43f6c543",
   "public:emoji/aojiao.png": "eec159edbe59f0bd44",
   "public:emoji/aixin.png": "f23a3af02424f11a1a",
-  "public:emoji/aihei.png": "3b585b4e6157697079"
+  "public:emoji/aihei.png": "3b585b4e6157697079",
+  "public:assets/images/wallpaper/sakura-garden.webp": "6173d87183d94f63b0",
+  "public:assets/images/wallpaper/moonlit-ruins.webp": "0c22331735520d2034",
+  "public:assets/images/wallpaper/lantern-path.webp": "92659f986ca9885162"
 }

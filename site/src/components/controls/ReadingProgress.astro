@@ -1,0 +1,82 @@
+<div id="reading-progress" aria-hidden="true">
+	<div id="reading-progress-value"></div>
+</div>
+
+<style>
+	#reading-progress {
+		position: fixed;
+		top: 4.5rem;
+		left: 0;
+		z-index: 49;
+		width: 100%;
+		height: 3px;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 180ms ease;
+	}
+
+	#reading-progress.active {
+		opacity: 1;
+	}
+
+	#reading-progress-value {
+		width: 100%;
+		height: 100%;
+		transform: scaleX(0);
+		transform-origin: left center;
+		background: var(--primary);
+		box-shadow: 0 1px 6px color-mix(in oklab, var(--primary) 55%, transparent);
+		will-change: transform;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		#reading-progress {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	let article: HTMLElement | null = null;
+	let progress: HTMLElement | null = null;
+	let value: HTMLElement | null = null;
+	let resizeObserver: ResizeObserver | null = null;
+	let frame = 0;
+
+	function updateReadingProgress() {
+		frame = 0;
+		if (!article || !progress || !value) return;
+
+		const articleTop = article.getBoundingClientRect().top + window.scrollY;
+		const readableDistance = Math.max(article.offsetHeight - window.innerHeight, 1);
+		const ratio = Math.min(Math.max((window.scrollY - articleTop) / readableDistance, 0), 1);
+		value.style.transform = `scaleX(${ratio})`;
+	}
+
+	function requestProgressUpdate() {
+		if (!frame) frame = window.requestAnimationFrame(updateReadingProgress);
+	}
+
+	function initReadingProgress() {
+		article = document.querySelector<HTMLElement>(".markdown-content");
+		progress = document.getElementById("reading-progress");
+		value = document.getElementById("reading-progress-value");
+		resizeObserver?.disconnect();
+
+		if (!article || !progress || !value) {
+			progress?.classList.remove("active");
+			return;
+		}
+
+		progress.classList.add("active");
+		resizeObserver = new ResizeObserver(requestProgressUpdate);
+		resizeObserver.observe(article);
+		requestProgressUpdate();
+	}
+
+	window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+	window.addEventListener("resize", requestProgressUpdate, { passive: true });
+	document.addEventListener("astro:page-load", initReadingProgress);
+	document.addEventListener("swup:contentReplaced", initReadingProgress);
+	initReadingProgress();
+</script>

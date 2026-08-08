@@ -1,0 +1,197 @@
+<div id="pointer-effects" aria-hidden="true">
+	<div id="pointer-ring"></div>
+	<div id="pointer-cursor"><span></span></div>
+	<div id="pointer-trail">
+		{Array.from({ length: 8 }, (_, index) => <span style={`--trail-index: ${index}`} />)}
+	</div>
+</div>
+
+<style>
+	#pointer-effects {
+		position: fixed;
+		inset: 0;
+		z-index: 9998;
+		pointer-events: none;
+		visibility: hidden;
+	}
+
+	#pointer-effects.visible {
+		visibility: visible;
+	}
+
+	#pointer-cursor,
+	#pointer-ring,
+	#pointer-trail span {
+		position: fixed;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		will-change: transform;
+	}
+
+	#pointer-cursor {
+		width: 18px;
+		height: 24px;
+		transform-origin: 0 0;
+		filter: drop-shadow(0 1px 1px rgb(255 255 255 / 0.9))
+			drop-shadow(0 1px 3px rgb(0 0 0 / 0.25));
+		transition: opacity 120ms ease;
+	}
+
+	#pointer-cursor span {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: var(--primary);
+		clip-path: polygon(0 0, 0 88%, 5px 14px, 9px 23px, 13px 21px, 8px 13px, 18px 12px);
+		transition: width 140ms ease, height 140ms ease, border-radius 140ms ease;
+	}
+
+	#pointer-ring {
+		width: 30px;
+		height: 30px;
+		border: 1.5px solid color-mix(in oklab, var(--primary) 70%, white);
+		border-radius: 50%;
+		background: color-mix(in oklab, var(--primary) 8%, transparent);
+		box-shadow: 0 0 10px color-mix(in oklab, var(--primary) 22%, transparent);
+		transition: width 160ms ease, height 160ms ease, background 160ms ease,
+			border-color 160ms ease, opacity 120ms ease;
+	}
+
+	#pointer-effects.is-interactive #pointer-ring {
+		width: 42px;
+		height: 42px;
+		border-color: var(--primary);
+		background: color-mix(in oklab, var(--primary) 16%, transparent);
+	}
+
+	#pointer-effects.is-pressed #pointer-ring {
+		width: 24px;
+		height: 24px;
+		background: color-mix(in oklab, var(--primary) 28%, transparent);
+	}
+
+	#pointer-effects.is-text #pointer-cursor span {
+		width: 2px;
+		height: 22px;
+		border-radius: 2px;
+		clip-path: none;
+	}
+
+	#pointer-trail span {
+		width: calc(7px - var(--trail-index) * 0.45px);
+		height: calc(7px - var(--trail-index) * 0.45px);
+		border-radius: 50%;
+		background: var(--primary);
+		opacity: calc(0.42 - var(--trail-index) * 0.045);
+		box-shadow: 0 0 7px color-mix(in oklab, var(--primary) 35%, transparent);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		:global(html.pointer-effects-enabled),
+		:global(html.pointer-effects-enabled *) {
+			cursor: none !important;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+		#pointer-effects {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const effects = document.getElementById("pointer-effects");
+	const cursor = document.getElementById("pointer-cursor");
+	const ring = document.getElementById("pointer-ring");
+	const trail = Array.from(document.querySelectorAll<HTMLElement>("#pointer-trail span"));
+
+	let pointerX = -100;
+	let pointerY = -100;
+	let ringX = -100;
+	let ringY = -100;
+	let initialized = false;
+	let animationFrame = 0;
+	const trailPoints = trail.map(() => ({ x: -100, y: -100 }));
+
+	function updateTarget(target: EventTarget | null) {
+		if (!(target instanceof Element) || !effects) return;
+		const interactive = target.closest("a, button, summary, label, select, [role='button'], [tabindex]");
+		const textTarget = target.closest("input, textarea, [contenteditable='true'], .markdown-content p");
+		effects.classList.toggle("is-interactive", Boolean(interactive));
+		effects.classList.toggle("is-text", Boolean(textTarget) && !interactive);
+	}
+
+	function renderPointer() {
+		ringX += (pointerX - ringX) * 0.2;
+		ringY += (pointerY - ringY) * 0.2;
+		cursor?.style.setProperty("transform", `translate3d(${pointerX}px, ${pointerY}px, 0)`);
+		ring?.style.setProperty(
+			"transform",
+			`translate3d(${ringX - ring!.offsetWidth / 2}px, ${ringY - ring!.offsetHeight / 2}px, 0)`,
+		);
+
+		let leaderX = pointerX;
+		let leaderY = pointerY;
+		trailPoints.forEach((point, index) => {
+			const follow = Math.max(0.14, 0.34 - index * 0.02);
+			point.x += (leaderX - point.x) * follow;
+			point.y += (leaderY - point.y) * follow;
+			trail[index]?.style.setProperty(
+				"transform",
+				`translate3d(${point.x - 3}px, ${point.y - 3}px, 0)`,
+			);
+			leaderX = point.x;
+			leaderY = point.y;
+		});
+
+		animationFrame = window.requestAnimationFrame(renderPointer);
+	}
+
+	function enablePointerEffects() {
+		if (initialized || !finePointer.matches || reducedMotion.matches || !effects) return;
+		initialized = true;
+		document.documentElement.classList.add("pointer-effects-enabled");
+		animationFrame = window.requestAnimationFrame(renderPointer);
+	}
+
+	function disablePointerEffects() {
+		initialized = false;
+		document.documentElement.classList.remove("pointer-effects-enabled");
+		effects?.classList.remove("visible", "is-interactive", "is-text", "is-pressed");
+		window.cancelAnimationFrame(animationFrame);
+	}
+
+	document.addEventListener("pointermove", (event) => {
+		if (!initialized || event.pointerType === "touch") return;
+		pointerX = event.clientX;
+		pointerY = event.clientY;
+		if (ringX < 0) {
+			ringX = pointerX;
+			ringY = pointerY;
+			trailPoints.forEach((point) => {
+				point.x = pointerX;
+				point.y = pointerY;
+			});
+		}
+		effects?.classList.add("visible");
+		updateTarget(event.target);
+	});
+	document.addEventListener("pointerdown", () => effects?.classList.add("is-pressed"));
+	document.addEventListener("pointerup", () => effects?.classList.remove("is-pressed"));
+	document.addEventListener("pointerleave", () => effects?.classList.remove("visible"));
+	window.addEventListener("blur", () => effects?.classList.remove("visible"));
+	finePointer.addEventListener("change", () => {
+		disablePointerEffects();
+		enablePointerEffects();
+	});
+	reducedMotion.addEventListener("change", () => {
+		disablePointerEffects();
+		enablePointerEffects();
+	});
+
+	enablePointerEffects();
+</script>

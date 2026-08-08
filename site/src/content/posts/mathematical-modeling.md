@@ -4,7 +4,7 @@ description: "整理数学建模问题从分析、假设、建模到验证和写
 published: 2026-08-08
 category: "数学建模"
 tags: ["数学建模", "算法", "论文写作"]
-image: "../../assets/images/DesktopWallpaper/d5.avif"
+image: "/assets/images/wallpaper/sakura-garden.webp"
 draft: false
 ---
 

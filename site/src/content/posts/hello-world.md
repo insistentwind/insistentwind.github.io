@@ -4,7 +4,7 @@ description: "从一套需要数据库和服务器的博客系统，迁移到简
 published: 2026-08-08
 category: "随笔"
 tags: ["博客", "开始"]
-image: "../../assets/images/DesktopWallpaper/d2.avif"
+image: "/assets/images/wallpaper/moonlit-ruins.webp"
 pinned: true
 ---
 

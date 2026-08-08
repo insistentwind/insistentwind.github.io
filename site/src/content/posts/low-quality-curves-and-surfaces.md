@@ -4,7 +4,7 @@ description: "整理低质量曲线与曲面的识别、修复和质量评估方
 published: 2026-08-08
 category: "几何处理"
 tags: ["曲线曲面", "几何处理", "CAD"]
-image: "../../assets/images/DesktopWallpaper/d1.avif"
+image: "/assets/images/wallpaper/sakura-garden.webp"
 draft: false
 ---
 

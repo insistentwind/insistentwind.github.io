@@ -4,7 +4,7 @@ description: "用少量固定结构，记录决定、问题和结果，让未来
 published: 2026-08-05
 category: "方法"
 tags: ["项目", "复盘", "效率"]
-image: "../../assets/images/DesktopWallpaper/d4.avif"
+image: "/assets/images/wallpaper/lantern-path.webp"
 ---
 
 项目记录的价值不是证明做过多少事，而是让关键上下文不必依赖记忆。

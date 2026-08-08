@@ -83,6 +83,12 @@ const posterAvatarUrl = getDirectImageUrl(profileConfig.avatar);
 const posterAvatarSelector = profileConfig.avatar
 	? ".profile-avatar-image img"
 	: null;
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(getPostUrlBySlug(entry.id), siteOrigin).href;
+const structuredCoverSource = getDirectImageUrl(processedImage);
+const structuredCoverUrl = structuredCoverSource
+	? new URL(structuredCoverSource, siteOrigin).href
+	: undefined;
 
 dayjs.extend(utc);
 
@@ -95,13 +101,19 @@ const jsonLd = {
 	author: {
 		"@type": "Person",
 		name: profileConfig.name,
-		url: Astro.site,
+		url: new URL("/about/", siteOrigin).href,
 	},
-	datePublished: formatDateToYYYYMMDD(entry.data.published),
+	datePublished: entry.data.published.toISOString(),
+	dateModified: (entry.data.updated ?? entry.data.published).toISOString(),
+	mainEntityOfPage: {
+		"@type": "WebPage",
+		"@id": canonicalUrl,
+	},
+	url: canonicalUrl,
+	...(structuredCoverUrl ? { image: [structuredCoverUrl] } : {}),
 	inLanguage: entry.data.lang
 		? entry.data.lang.replace("_", "-")
 		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
 };
 
 const relatedPosts = await getRelatedPosts(entry, 5);
