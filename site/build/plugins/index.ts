@@ -7,12 +7,10 @@ import unplugin from "./unplugin";
  * vite插件
  * @param viteEnv - 环境变量配置
  */
-export function setupVitePlugins(
-	viteEnv: Env.ImportMeta
-): (PluginOption | PluginOption[])[] {
+export function setupVitePlugins(): (PluginOption | PluginOption[])[] {
 	const plugins = [
 		vue(),
-		...unplugin(viteEnv),
+		...unplugin(),
 		unocss(),
 	];
 	return plugins;

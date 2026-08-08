@@ -8,13 +8,14 @@ import Components from "unplugin-vue-components/vite";
 import { prismjsPlugin } from "vite-plugin-prismjs";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
-export default function unplugin(viteEnv: Env.ImportMeta) {
-	const { VITE_ICON_PREFIX, VITE_ICON_LOCAL_PREFIX } = viteEnv;
+export default function unplugin() {
+	const iconPrefix = "icon";
+	const localIconPrefix = "icon-local";
 
 	const localIconPath = path.join(process.cwd(), "src/assets/icons");
 	/** 本地svg图标集合名称 */
-	const collectionName = VITE_ICON_LOCAL_PREFIX.replace(
-		`${VITE_ICON_PREFIX}-`,
+	const collectionName = localIconPrefix.replace(
+		`${iconPrefix}-`,
 		""
 	);
 
@@ -40,7 +41,7 @@ export default function unplugin(viteEnv: Env.ImportMeta) {
 				NaiveUiResolver(),
 				IconsResolver({
 					customCollections: [collectionName],
-					componentPrefix: VITE_ICON_PREFIX,
+					componentPrefix: iconPrefix,
 				}),
 			],
 		}),
