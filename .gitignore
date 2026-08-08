@@ -1,11 +1,10 @@
 .idea/
 .vscode/
 
-# Node / Astro
+# Node / build output
 node_modules/
 site/node_modules/
 site/dist/
-site/.astro/
 
 # Environment and local files
 .env
