@@ -1,0 +1,16 @@
+---
+import { Mail } from "@lucide/astro";
+import { siteConfig } from "../config";
+import GithubMark from "./GithubMark.astro";
+---
+
+<footer class="site-footer">
+  <div>
+    <p class="footer-title">继续记录，保持好奇。</p>
+    <p>© {new Date().getFullYear()} {siteConfig.author} · Built with Astro and GitHub Pages</p>
+  </div>
+  <div class="footer-links">
+    <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubMark size={19} /></a>
+    {siteConfig.email && <a href={`mailto:${siteConfig.email}`} aria-label="发送邮件"><Mail size={19} /></a>}
+  </div>
+</footer>

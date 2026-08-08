@@ -1,0 +1,31 @@
+---
+import { ArrowUpRight, Mail } from "@lucide/astro";
+import GithubMark from "../components/GithubMark.astro";
+import { siteConfig } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/site";
+---
+
+<BaseLayout title="关于" description={`关于${siteConfig.author}和这个博客`}>
+  <section class="about-hero">
+    <img src={withBase("images/about-workspace.jpg")} alt="安静的创作工作空间" />
+    <div>
+      <p class="section-kicker">About</p>
+      <h1>你好，我是<br />{siteConfig.author}</h1>
+      <p>{siteConfig.description}</p>
+    </div>
+  </section>
+  <section class="content-shell about-content">
+    <div class="about-copy prose">
+      <h2>关于这个博客</h2>
+      <p>这是一个完全静态的个人博客，文章以 Markdown 文件保存。它不需要数据库，也不需要单独购买服务器，所有页面会由 GitHub Actions 自动生成并发布到 GitHub Pages。</p>
+      <p>你可以在这里补充个人经历、关注的技术方向、正在做的项目，或任何希望让读者了解的内容。</p>
+      <blockquote>比起追求更新频率，更重要的是留下经过思考、以后仍愿意回看的内容。</blockquote>
+    </div>
+    <aside class="contact-panel">
+      <p>找到我</p>
+      <a href={siteConfig.github} target="_blank" rel="noreferrer"><GithubMark size={19} /> GitHub <ArrowUpRight size={16} /></a>
+      {siteConfig.email && <a href={`mailto:${siteConfig.email}`}><Mail size={19} /> {siteConfig.email} <ArrowUpRight size={16} /></a>}
+    </aside>
+  </section>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import { ArrowUpRight, CalendarDays } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate, withBase } from "../utils/site";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+---
+
+<BaseLayout title="归档" description="按时间浏览所有文章">
+  <section class="page-hero content-shell">
+    <p class="section-kicker">Archive</p>
+    <h1>所有文章</h1>
+    <p>按时间整理的写作记录。可以用顶部搜索快速找到主题。</p>
+  </section>
+  <section class="content-shell archive-layout">
+    <div class="archive-list">
+      {posts.map((post) => (
+        <article>
+          <div class="archive-date"><CalendarDays size={16} /> {formatDate(post.data.publishedAt)}</div>
+          <div>
+            <span class="archive-category">{post.data.category}</span>
+            <h2><a href={withBase(`posts/${post.id.replace(/\.(md|mdx)$/, "")}/`)}>{post.data.title}</a></h2>
+            <p>{post.data.description}</p>
+          </div>
+          <a class="archive-arrow" href={withBase(`posts/${post.id.replace(/\.(md|mdx)$/, "")}/`)} aria-label={`阅读${post.data.title}`}><ArrowUpRight size={20} /></a>
+        </article>
+      ))}
+    </div>
+    <aside class="topic-panel">
+      <p class="section-kicker">Topics</p>
+      <h2>主题标签</h2>
+      <div class="topic-cloud">
+        {tags.map((tag) => <span>#{tag}</span>)}
+      </div>
+    </aside>
+  </section>
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "name": "personal-static-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "new": "node scripts/new-post.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@lucide/astro": "^1.30.0",
+    "astro": "^7.2.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.1"
+  }
+}

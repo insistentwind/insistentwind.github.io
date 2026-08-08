@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import { ArrowDown, ArrowRight, Sparkles } from "@lucide/astro";
+import PostCard from "../components/PostCard.astro";
+import { siteConfig } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/site";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const remainingPosts = posts.filter((post) => post.id !== featured?.id);
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <img class="hero-image" src={withBase("images/hero-desk.jpg")} alt="阳光下的桌面、笔记本电脑和纸质笔记" fetchpriority="high" />
+    <div class="hero-shade"></div>
+    <div class="hero-content">
+      <p class="eyebrow"><Sparkles size={16} /> Notes / Code / Life</p>
+      <h1>{siteConfig.title}</h1>
+      <p class="hero-intro">{siteConfig.intro}</p>
+      <div class="hero-actions">
+        <a class="primary-button" href="#latest">阅读文章 <ArrowRight size={18} /></a>
+        <a class="text-button" href={withBase("about/")}>关于我</a>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#latest" aria-label="查看最新文章"><ArrowDown size={22} /></a>
+  </section>
+
+  <section class="content-shell intro-strip" aria-label="博客简介">
+    <p>这里记录正在理解的事</p>
+    <div class="intro-stats">
+      <span><strong>{posts.length}</strong> 篇文章</span>
+      <span><strong>{allTags.length}</strong> 个标签</span>
+      <span><strong>∞</strong> 持续更新</span>
+    </div>
+  </section>
+
+  <section class="content-shell posts-section" id="latest">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Latest writing</p>
+        <h2>最近更新</h2>
+      </div>
+      <a href={withBase("archive/")}>全部文章 <ArrowRight size={17} /></a>
+    </div>
+
+    {featured && <PostCard post={featured} featured />}
+    <div class="post-grid">
+      {remainingPosts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>

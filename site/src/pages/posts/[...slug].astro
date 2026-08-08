@@ -1,0 +1,49 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { ArrowLeft, CalendarDays, Clock3 } from "@lucide/astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, readingTime, withBase } from "../../utils/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.(md|mdx)$/, "") },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} image={withBase(post.data.cover)}>
+  <article class="article-page">
+    <header class="article-header content-shell">
+      <a class="back-link" href={withBase("archive/")}><ArrowLeft size={17} /> 返回归档</a>
+      <div class="article-meta">
+        <span>{post.data.category}</span>
+        <time datetime={post.data.publishedAt.toISOString()}><CalendarDays size={15} /> {formatDate(post.data.publishedAt)}</time>
+        <span><Clock3 size={15} /> {readingTime(post.body ?? "")} 分钟阅读</span>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.description}</p>
+      <div class="tag-list">{post.data.tags.map((tag) => <span>#{tag}</span>)}</div>
+    </header>
+    <div class="article-cover content-shell">
+      <img src={withBase(post.data.cover)} alt={post.data.coverAlt} />
+    </div>
+    <div class="article-layout content-shell">
+      <div class="prose article-content"><Content /></div>
+      {headings.length > 1 && (
+        <aside class="toc">
+          <p>本页目录</p>
+          <nav>{headings.filter((heading) => heading.depth <= 3).map((heading) => <a class:list={{ nested: heading.depth === 3 }} href={`#${heading.slug}`}>{heading.text}</a>)}</nav>
+        </aside>
+      )}
+    </div>
+  </article>
+</BaseLayout>

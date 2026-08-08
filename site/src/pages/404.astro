@@ -1,0 +1,13 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/site";
+---
+
+<BaseLayout title="页面未找到">
+  <section class="not-found content-shell">
+    <p>404</p>
+    <h1>这页内容还没有写下。</h1>
+    <a class="primary-button" href={withBase()}><ArrowLeft size={18} /> 返回首页</a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,29 @@
+.idea/
+.vscode/
+
+# Node / Astro
+node_modules/
+site/node_modules/
+site/dist/
+site/.astro/
+
+# Environment and local files
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+
+# Legacy build outputs
+blog-vue/**/node_modules/
+blog-vue/**/dist/
+blog-vue/**/blog/
+blog-springboot/target/
+
+# Legacy full-stack project (kept locally, not published with the static blog)
+blog-vue/
+blog-springboot/
+deploy/
+emoji/
+blog.sql
+fireworks.min.js
