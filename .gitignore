@@ -14,3 +14,6 @@ site/cache/
 *.log
 .DS_Store
 Thumbs.db
+
+# Local reference projects and archives (never publish)
+_local/

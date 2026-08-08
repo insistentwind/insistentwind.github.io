@@ -1,53 +1,52 @@
 # InsistentWind 的 Astro 博客
 
-这是一个无需后端的静态博客。网站以 Astro + Firefly 为主体，并借鉴原 Vue Shoka 博客的波浪页头、交错文章卡片和轻量侧栏。
+这是部署在 <https://insistentwind.github.io/> 的静态博客。`site/` 是唯一需要构建和提交的站点源码，推送到 `main` 后由 GitHub Actions 自动发布。
 
-线上地址：<https://insistentwind.github.io/>
+## 快速开始
 
-## 日常写作
+第一次使用先安装依赖：
 
-```bash
+```powershell
 cd site
 corepack pnpm install
+```
+
+以后新建和预览文章只需要：
+
+```powershell
+cd site
 corepack pnpm new -- "文章标题" article-slug
 corepack pnpm dev
 ```
 
-草稿会生成在 `site/src/content/posts/`。写完后把文章头部的 `draft: true` 改为 `draft: false`。
+脚本会同时创建：
 
-文章图片可以放在 `site/public/images/`；emoji 位于 `site/public/emoji/`，正文中直接使用：
-
-```markdown
-![吃瓜](/emoji/chigua.png)
+```text
+site/src/content/posts/article-slug.md       # 文章草稿
+site/public/assets/posts/article-slug/       # 这篇文章的图片
 ```
 
-## 目录
+完整的写作、图片引用、检查和发布步骤见 [BLOG_WORKFLOW.md](BLOG_WORKFLOW.md)。
+
+## 目录职责
 
 ```text
 .
-├─ site/
-│  ├─ public/emoji/                 # emoji 图片
-│  ├─ scripts/new-post.mjs          # 新建草稿脚本
+├─ site/                              # 博客源码，提交到 GitHub
+│  ├─ public/assets/posts/<slug>/     # 每篇文章自己的图片
+│  ├─ public/emoji/                   # 正文 emoji
+│  ├─ scripts/new-post.mjs            # 草稿生成器
 │  └─ src/
-│     ├─ assets/images/             # 壁纸、头像等主题图片
-│     ├─ config/                    # 站点、导航、侧栏和主题配置
-│     ├─ content/posts/             # Markdown 文章
-│     ├─ content/spec/about.md      # 关于页
-│     ├─ components/                # Astro/Svelte 组件
-│     └─ styles/                    # 全站与 Shoka 融合样式
-└─ .github/workflows/               # GitHub Pages 自动发布
+│     ├─ content/posts/               # Markdown / MDX 文章
+│     ├─ assets/images/               # 壁纸等主题素材
+│     ├─ config/                      # 站点和主题配置
+│     ├─ components/                  # 页面组件
+│     └─ styles/                      # 全站样式
+├─ _local/references/                 # 本地参考工程，不提交
+└─ .github/workflows/                 # GitHub Pages 自动发布
 ```
 
-## 检查与发布
-
-```bash
-cd site
-corepack pnpm check
-corepack pnpm type-check
-corepack pnpm build
-```
-
-提交并推送到 `main` 后，GitHub Actions 会自动构建并发布 `site/dist/`。
+`_local/` 已被 Git 忽略，当前 Mizuki 参考工程归档在 `_local/references/Mizuki/`，不会混入博客提交。
 
 ## 开源说明
 

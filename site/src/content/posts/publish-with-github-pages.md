@@ -14,10 +14,10 @@ image: "/assets/images/wallpaper/lantern-path.webp"
 可以直接运行下面的命令创建一篇草稿：
 
 ```bash
-pnpm new -- "文章标题" article-slug
+corepack pnpm new -- "文章标题" article-slug
 ```
 
-草稿会生成在 `site/src/content/posts/`。也可以复制任意一篇文章，再修改文件名和顶部信息：
+脚本会在 `site/src/content/posts/` 生成草稿，并在 `site/public/assets/posts/article-slug/` 创建这篇文章专用的图片目录。也可以复制任意一篇文章，再修改文件名和顶部信息：
 
 ```yaml
 ---
@@ -33,6 +33,12 @@ draft: false
 
 在第二个 `---` 后使用普通 Markdown 写正文即可。
 
+文章图片统一放在与文章 slug 同名的目录中，例如：
+
+```markdown
+![图片说明](/assets/posts/article-slug/figure-01.webp)
+```
+
 需要使用表情时，可以引用 `site/public/emoji/` 中的图片：
 
 ```markdown
@@ -44,7 +50,7 @@ draft: false
 进入 `site` 目录后运行：
 
 ```bash
-pnpm dev
+corepack pnpm dev
 ```
 
 默认预览地址是 `http://localhost:4321/`。确认无误后提交并推送：
