@@ -5,6 +5,8 @@
 node_modules/
 site/node_modules/
 site/dist/
+site/.astro/
+site/cache/
 
 # Environment and local files
 .env

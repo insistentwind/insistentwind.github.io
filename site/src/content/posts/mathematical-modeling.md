@@ -1,11 +1,10 @@
 ---
 title: "数学建模"
 description: "整理数学建模问题从分析、假设、建模到验证和写作的完整过程。"
-publishedAt: 2026-08-08
+published: 2026-08-08
 category: "数学建模"
 tags: ["数学建模", "算法", "论文写作"]
-cover: "images/cover-notes.jpg"
-coverAlt: "桌面上的纸质笔记和钢笔"
+image: "../../assets/images/DesktopWallpaper/d5.avif"
 draft: false
 ---
 

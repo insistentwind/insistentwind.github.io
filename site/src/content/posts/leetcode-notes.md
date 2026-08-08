@@ -1,11 +1,10 @@
 ---
 title: "力扣"
 description: "按题型整理力扣练习、常用模板、错误原因和复习记录。"
-publishedAt: 2026-08-08
+published: 2026-08-08
 category: "算法"
 tags: ["LeetCode", "数据结构", "算法"]
-cover: "images/cover-code.jpg"
-coverAlt: "正在使用笔记本电脑编写代码"
+image: "../../assets/images/DesktopWallpaper/d6.avif"
 draft: false
 ---
 

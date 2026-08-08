@@ -1,12 +1,11 @@
 ---
 title: "你好，这里是我的新博客"
 description: "从一套需要数据库和服务器的博客系统，迁移到简单、稳定、可以长期维护的静态站点。"
-publishedAt: 2026-08-08
+published: 2026-08-08
 category: "随笔"
 tags: ["博客", "开始"]
-cover: "images/cover-notes.jpg"
-coverAlt: "桌面上的纸质笔记和咖啡"
-featured: true
+image: "../../assets/images/DesktopWallpaper/d2.avif"
+pinned: true
 ---
 
 欢迎来到我的博客。

@@ -1,11 +1,10 @@
 ---
 title: "拓扑优化重建"
 description: "记录从拓扑优化结果到可编辑、可制造几何模型的重建流程。"
-publishedAt: 2026-08-08
+published: 2026-08-08
 category: "结构优化"
 tags: ["拓扑优化", "几何重建", "有限元"]
-cover: "images/about-workspace.jpg"
-coverAlt: "明亮工作空间中的桌面和电脑"
+image: "../../assets/images/DesktopWallpaper/d4.avif"
 draft: false
 ---
 

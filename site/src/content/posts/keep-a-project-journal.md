@@ -1,11 +1,10 @@
 ---
 title: "给项目留一份可查找的工作日志"
 description: "用少量固定结构，记录决定、问题和结果，让未来的自己更快找到上下文。"
-publishedAt: 2026-08-05
+published: 2026-08-05
 category: "方法"
 tags: ["项目", "复盘", "效率"]
-cover: "images/about-workspace.jpg"
-coverAlt: "有书架和桌灯的工作空间"
+image: "../../assets/images/DesktopWallpaper/d4.avif"
 ---
 
 项目记录的价值不是证明做过多少事，而是让关键上下文不必依赖记忆。

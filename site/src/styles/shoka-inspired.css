@@ -1,0 +1,190 @@
+/* Shoka-inspired refinements layered on top of Firefly's layout system. */
+:root {
+  --radius-large: 0.5rem;
+  --insistent-coral: #e9546b;
+  --insistent-teal: #3e999f;
+  --insistent-gold: #d59b3d;
+  --page-bg: #f5f7f8;
+  --card-bg: rgb(255 255 255 / 0.94);
+}
+
+:root.dark {
+  --page-bg: #17191c;
+  --card-bg: rgb(35 38 42 / 0.96);
+}
+
+body {
+  letter-spacing: 0;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.42), transparent 24rem),
+    var(--page-bg);
+}
+
+.banner-home-text-overlay {
+  text-shadow: 0 0.15rem 1rem rgb(12 19 28 / 0.5);
+}
+
+.banner-title {
+  font-family: var(--font-greatvibes), "Noto Serif SC", serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.banner-subtitle {
+  padding: 0.35rem 0.8rem;
+  border-top: 1px solid rgb(255 255 255 / 0.45);
+  border-bottom: 1px solid rgb(255 255 255 / 0.45);
+  letter-spacing: 0;
+  text-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.55);
+}
+
+#navbar > div {
+  border-radius: 0 0 0.5rem 0.5rem !important;
+}
+
+.card-base,
+.card-base-transparent,
+.widget,
+.btn-card {
+  border-radius: 0.5rem !important;
+}
+
+.enable-card-border .card-base,
+.enable-card-border .card-base-transparent,
+.enable-card-border .widget {
+  border-color: rgb(20 28 38 / 0.08) !important;
+  box-shadow: 0 0.75rem 2rem -1.35rem rgb(20 28 38 / 0.42) !important;
+}
+
+:root.dark .enable-card-border .card-base,
+:root.dark .enable-card-border .card-base-transparent,
+:root.dark .enable-card-border .widget {
+  border-color: rgb(255 255 255 / 0.1) !important;
+  box-shadow: 0 0.8rem 2rem -1.25rem rgb(0 0 0 / 0.78) !important;
+}
+
+.post-card-wrapper {
+  min-height: 14rem;
+  isolation: isolate;
+}
+
+.post-card-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--insistent-coral), var(--insistent-gold), var(--insistent-teal));
+  opacity: 0;
+  transition: opacity 180ms ease;
+  z-index: 30;
+}
+
+.post-card-wrapper:hover::after {
+  opacity: 0.72;
+}
+
+.post-card-title {
+  letter-spacing: 0 !important;
+}
+
+.post-card-bottom-tags a {
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.profile-avatar-image {
+  width: 9rem !important;
+  height: 9rem !important;
+  margin-inline: auto !important;
+  border: 3px solid rgb(255 255 255 / 0.88);
+  border-radius: 50% !important;
+  object-fit: cover;
+  box-shadow: 0 0.6rem 1.5rem -0.75rem rgb(20 28 38 / 0.58);
+}
+
+.custom-md {
+  line-height: 1.85;
+}
+
+.custom-md h2 {
+  padding-left: 0.8rem;
+  border-left: 4px solid var(--insistent-coral);
+}
+
+.custom-md h3 {
+  text-decoration-color: color-mix(in srgb, var(--insistent-teal) 45%, transparent);
+}
+
+@media (min-width: 768px) {
+  .list-mode .post-card-wrapper.has-cover .post-card-image {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 43% !important;
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .list-mode .post-card-wrapper.has-cover .post-card-content {
+    width: 59% !important;
+    padding: 1.6rem 1rem 1.5rem 2rem !important;
+  }
+
+  .list-mode .post-card-wrapper:nth-child(even) .post-card-image {
+    right: auto !important;
+    left: 0 !important;
+    border-radius: 0.5rem 0 0 0.5rem !important;
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  }
+
+  .list-mode .post-card-wrapper:nth-child(even) .post-card-content {
+    margin-left: auto !important;
+    padding: 1.6rem 2rem 1.5rem 1rem !important;
+  }
+
+  .list-mode .post-card-wrapper:nth-child(even) .post-card-title::before {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .banner-title {
+    font-size: 3rem !important;
+  }
+
+  .banner-subtitle {
+    max-width: min(88vw, 24rem);
+    white-space: normal;
+  }
+
+  #post-list-container.list-mode > .post-card-wrapper {
+    min-height: 0;
+    flex-direction: column-reverse !important;
+  }
+
+  #post-list-container.list-mode > .post-card-wrapper.has-cover .post-card-content {
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  #post-list-container.list-mode > .post-card-wrapper.has-cover .post-card-image {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+  }
+
+  .profile-avatar-image {
+    width: 7.5rem !important;
+    height: 7.5rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card-wrapper::after {
+    transition: none;
+  }
+}
